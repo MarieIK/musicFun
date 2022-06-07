@@ -15,14 +15,15 @@ fun main() {
     println("Являетесь ли Вы постоянным покупателем (true/false)?")
     val regularCustomer = readln().toBoolean()
 
-    if (regularCustomer && totalAmount > PURCHASE_FROM_1_000 && totalAmount <= PURCHASE_FROM_10_000) {
-        totalAmount = (totalAmount - DISCOUNT) * SUPER_DISCOUNT
-    } else if (regularCustomer && totalAmount > PURCHASE_FROM_10_000) {
-        totalAmount = (totalAmount * REGULAR_DISCOUNT) * SUPER_DISCOUNT
-    } else if (!regularCustomer && totalAmount > PURCHASE_FROM_1_000 && totalAmount <= PURCHASE_FROM_10_000) {
-        totalAmount -= DISCOUNT
-    } else if (!regularCustomer && totalAmount > PURCHASE_FROM_10_000) {
-        totalAmount *= REGULAR_DISCOUNT
+    when {
+        regularCustomer && (totalAmount > PURCHASE_FROM_1_000) && (totalAmount <= PURCHASE_FROM_10_000) ->
+            totalAmount = (totalAmount - DISCOUNT) * SUPER_DISCOUNT
+        regularCustomer && (totalAmount > PURCHASE_FROM_10_000) ->
+            totalAmount = (totalAmount * REGULAR_DISCOUNT) * SUPER_DISCOUNT
+        !regularCustomer && (totalAmount > PURCHASE_FROM_1_000) && (totalAmount <= PURCHASE_FROM_10_000) ->
+            totalAmount -= DISCOUNT
+        !regularCustomer && (totalAmount > PURCHASE_FROM_10_000) ->
+            totalAmount *= REGULAR_DISCOUNT
     }
 
     totalDiscount = (count * PRICE) - totalAmount
